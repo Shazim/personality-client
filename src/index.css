@@ -11,6 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.modal-overlay{
+  position: fixed;
+z-index: 14;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+background: rgba(0, 0, 0, 0.8)
+}
 
 @tailwind base;
 @tailwind components;
