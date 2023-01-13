@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { getCookie } from 'cookies/Cookies';
+import axios from "axios";
+import { getCookie } from "cookies/Cookies";
 
 const getHeader = () => {
   const headers = {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
+    "Content-Type": "application/json",
+    Accept: "application/json",
     Authorization: `Bearer ${
-      getCookie('user') && JSON.parse(getCookie('user'))?.access_token
+      getCookie("user") && JSON.parse(getCookie("user"))?.access_token
     }`,
   };
   return headers;
