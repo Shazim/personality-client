@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": ["airbnb", "prettier"],
   "plugins": ["prettier"],
   "rules": {
     "react/jsx-filename-extension": [
@@ -9,5 +9,5 @@
       }
     ]
   },
-  "parser": "babel-eslint"
+  "parser": "react-scripts/node_modules/babel-eslint"
 }

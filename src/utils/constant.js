@@ -5,6 +5,5 @@ export const END_POINTS = {
 
 export const LINKS = {
   HOME: "/",
-  STORE: "/store",
-  My_PROFILE: "/my-profile",
+  TEST: "/test",
 };

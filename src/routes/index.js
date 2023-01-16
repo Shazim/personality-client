@@ -1,4 +1,4 @@
-import { Home } from "pages/home";
+import { Home } from "pages";
 
 // List of Routes name using for links and route
 export const routes = Object.freeze({
@@ -11,5 +11,10 @@ export default Object.freeze([
     path: routes.HOME,
     component: Home,
     privateRoute: false,
+  },
+  {
+    path: routes.TEST,
+    component: Home,
+    privateRoute: true,
   },
 ]);
