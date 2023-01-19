@@ -3,12 +3,12 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        "128": "32rem",
-        "144": "36rem",
+        128: "32rem",
+        144: "36rem",
         450: "450px",
       },
       colors: {
-        blue: "green",
+        blue: "blue",
         purple: "#6b46c1",
         pink: "#ff49db",
         orange: "#ff7849",

@@ -1,7 +1,40 @@
 import React, { useState } from "react";
 import ModalLayout from "./ModalLayout";
+import { useFormik } from "formik";
+import { generateSchema } from "../validation";
+import { signUp } from "api";
 
 function SignUpModal({ open, onClose }) {
+  const initialValues = {
+    password: "",
+    email: "",
+    confirmPassword: "",
+  };
+  const {
+    values,
+    errors,
+    touched,
+    setFieldError,
+    setFieldTouched,
+    handleChange,
+    handleSubmit,
+    handleReset,
+    handleBlur,
+  } = useFormik({
+    initialValues,
+    onSubmit: async (values) => {
+      console.log("heelo", values);
+      const result = await signUp({
+        email: values.email,
+        password: values.password,
+        password_confirmation: values.confirmPassword,
+      });
+      if (result) {
+        console.log("heelo", result);
+      }
+    },
+    validationSchema: generateSchema(initialValues),
+  });
   return (
     <div>
       <ModalLayout modalIsOpen={open} closeModal={onClose}>
@@ -19,8 +52,13 @@ function SignUpModal({ open, onClose }) {
               </label>
               <input
                 type="email"
+                name="email"
+                value={values.email}
+                onBlur={handleBlur}
+                onChange={handleChange}
                 className="block w-full px-4 py-2 mt-2 text-purple bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
+              <p className="error-text">{touched.email && errors.email}</p>
             </div>
             <div className="mb-2">
               <label
@@ -31,8 +69,16 @@ function SignUpModal({ open, onClose }) {
               </label>
               <input
                 type="password"
+                placeholder="Enter New Password"
+                name="password"
+                value={values.password}
+                onBlur={handleBlur}
+                onChange={handleChange}
                 className="block w-full px-4 py-2 mt-2 text-purple bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
+              <p className="error-text">
+                {touched.password && errors.password}
+              </p>
             </div>
             <div className="mb-2">
               <label
@@ -42,9 +88,15 @@ function SignUpModal({ open, onClose }) {
                 Confirm Password
               </label>
               <input
-                type="password"
+                type="confirmPassword"
+                value={values.confirmPassword}
+                onBlur={handleBlur}
+                onChange={handleChange}
                 className="block w-full px-4 py-2 mt-2 text-purple bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
+              <p className="error-text">
+                {touched.confirmPassword && errors.confirmPassword}
+              </p>
             </div>
             {/* <a href="#" className="text-xs text-purple-600 hover:underline">
               Forget Password?

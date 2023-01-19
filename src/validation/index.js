@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { camelCasetoNormal } from "utils";
+import { camelCasetoNormal } from "../utils";
 
 export const generateSchema = (param) => {
   const labels = Object.keys(param) || [];
@@ -13,10 +13,7 @@ export const generateSchema = (param) => {
     else if (label.indexOf("password") >= 0 || label.indexOf("Password") >= 0)
       schema[label] = Yup.string()
         .min(6)
-        .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/,
-          "Must Contain 6 Characters, One Uppercase, One Lowercase and One Number."
-        )
+
         .required(`${camelCasetoNormal(label)} is required`);
     else if (label.indexOf("confirm") >= 0)
       schema[label] = Yup.string()

@@ -11,26 +11,26 @@ function App() {
       <Router>
         <Routes>
           {router.map((item) => {
-            if (item.privateRoute) {
-              return (
-                <PrivateRoute
-                  key={item.path}
-                  path={item.path}
-                  element={<item.component />}
-                  exact
-                  privateRoute={item.privateRoute}
-                />
-              );
-            } else {
-              return (
-                <Route
-                  exact
-                  key={item.path}
-                  path={item.path}
-                  element={<item.component />}
-                />
-              );
-            }
+            // if (item.privateRoute) {
+            //   return (
+            //     <PrivateRoute
+            //       key={item.path}
+            //       path={item.path}
+            //       element={<item.component />}
+            //       exact
+            //       privateRoute={item.privateRoute}
+            //     />
+            //   );
+            // } else {
+            return (
+              <Route
+                exact
+                key={item.path}
+                path={item.path}
+                element={<item.component />}
+              />
+            );
+            // }
           })}
         </Routes>
       </Router>
