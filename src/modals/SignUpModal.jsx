@@ -11,6 +11,7 @@ function SignUpModal({ open, onClose }) {
     email: "",
     confirm: "",
   };
+
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues,
@@ -22,22 +23,22 @@ function SignUpModal({ open, onClose }) {
             password_confirmation: values.confirm,
           },
         });
+
         if (result?.data?.error) {
           toast.error("email has already taken");
         } else if (result?.data?.user) {
-          toast.success("user is created");
+          toast.success("Signup Successfully");
           onClose();
         }
       },
       validationSchema: generateSchema(initialValues),
     });
+
   return (
     <div>
       <ModalLayout modalIsOpen={open} closeModal={onClose}>
         <div className="px-20 pt-7 ">
-          <h1 className="text-3xl font-semibold text-center  underline">
-            Sign up
-          </h1>
+          <h1 className="text-3xl font-semibold text-center">Sign up</h1>
 
           <div className="mb-2">
             <label for="email" className="block text-sm font-semibold ">
@@ -47,9 +48,10 @@ function SignUpModal({ open, onClose }) {
               type="email"
               name="email"
               value={values.email}
+              placeholder="Enter your email"
               onBlur={handleBlur}
               onChange={handleChange}
-              className="block w-full px-4 py-2 mt-2  bg-white border rounded-md "
+              className="block w-full px-4 py-2 mt-2 bg-white border rounded-md "
             />
             <p className="error-text">{touched.email && errors.email}</p>
           </div>
@@ -62,7 +64,7 @@ function SignUpModal({ open, onClose }) {
             </label>
             <input
               type="password"
-              placeholder="Enter New Password"
+              placeholder="Enter new password"
               name="password"
               value={values.password}
               onBlur={handleBlur}
@@ -80,7 +82,7 @@ function SignUpModal({ open, onClose }) {
             </label>
             <input
               type="password"
-              placeholder="Enter Confirm Password"
+              placeholder="Enter confirm password"
               value={values.confirm}
               onBlur={handleBlur}
               onChange={handleChange}
@@ -93,7 +95,7 @@ function SignUpModal({ open, onClose }) {
           <div className="mt-6">
             <button
               onClick={handleSubmit}
-              className="w-full px-4 py-2 tracking-wide bg-black font-bold text-white transition-colors duration-200 transform  rounded-md"
+              className="w-full px-4 py-2 tracking-wide bg-black font-bold text-white transition-colors duration-200 transform rounded-md"
             >
               Signup
             </button>

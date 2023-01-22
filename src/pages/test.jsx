@@ -7,6 +7,7 @@ function Test() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [questionsData, setQuestionData] = useState([]);
   const [message, setMessage] = useState("");
+
   const handleGetData = async () => {
     const result = await getAllQuestions();
     if (result) {
@@ -26,6 +27,7 @@ function Test() {
       }
     }
   };
+
   useEffect(() => {
     handleGetData();
   }, []);
@@ -45,19 +47,26 @@ function Test() {
     <>
       <Header />
       {message != "" ? (
-        <div className="font-bold absolute absolute-center shadow-3xl p-20">
-          {message}
+        <div class="absolute absolute-center max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20">
+          <div>
+            <p class="mt-2 text-center text-gray-600">
+              Here is your Personality Test Result
+            </p>
+            <h2 class="text-gray-800 text-center text-3xl font-semibold">
+              {message}
+            </h2>
+          </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center mt-124">
+        <div className="absolute absolute-center py-4 px-8 bg-white shadow-lg rounded-lg my-20">
           <div>
-            <div className="shadow-3xl p-20 mb-20 ">
+            <div className="mb-5">
               <span className="font-bold"> Q{questionIndex + 1}:</span>{" "}
               {questions[questionIndex]?.question_text}
             </div>
             {questions[questionIndex]?.answers.map(
               ({ answer_text, id, point }, index) => (
-                <div className="shadow-3xl p-20 mb-5">
+                <div className="mb-2">
                   <input
                     type="radio"
                     onChange={() => handleChange(id, point)}

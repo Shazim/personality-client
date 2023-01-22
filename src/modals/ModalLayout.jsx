@@ -7,7 +7,6 @@ function ModalLayout({ children, closeModal, modalIsOpen }) {
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       overlayClassName="modal-overlay"
-      // style={customStyles}
       className="max-w-3xl bg-white mt-14 mx-auto max-h-450 outline-none  h-full "
     >
       {children}

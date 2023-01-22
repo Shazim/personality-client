@@ -1,6 +1,4 @@
-// ====================== IMPORTED LIBRARIES ====================
 import { useNavigate } from "react-router-dom";
-// ====================== IMPORTED UTILS ========================
 import { getCookie } from "cookies/Cookies";
 import { useEffect } from "react";
 

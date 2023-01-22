@@ -14,6 +14,7 @@ function SigninModal({ open, onClose, setAccessToken }) {
     password: "",
     email: "",
   };
+
   const [signUpModal, setSignUpModal] = useState(false);
   const history = useNavigate();
 
@@ -26,24 +27,24 @@ function SigninModal({ open, onClose, setAccessToken }) {
           password: values.password,
           grant_type: "password",
         });
+
         if (result) {
           setCookie("token", result?.data?.access_token);
           setAccessToken(result?.data?.access_token);
-          toast.success("login successfully");
+          toast.success("Login Successfully");
           onClose();
           history("/test");
         }
       },
       validationSchema: generateSchema(initialValues),
     });
+
   return (
     <>
       <div>
         <ModalLayout modalIsOpen={open} closeModal={onClose}>
           <div className="px-20 pt-7 ">
-            <h1 className="text-3xl font-semibold text-center  underline">
-              Sign in
-            </h1>
+            <h1 className="text-3xl font-semibold text-center">Sign in</h1>
             <div className="mt-6">
               <div className="mb-2">
                 <label
@@ -56,9 +57,10 @@ function SigninModal({ open, onClose, setAccessToken }) {
                   type="email"
                   name="email"
                   value={values.email}
+                  placeholder="Enter your email"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  className="block w-full px-4 py-2 mt-2 bg-white border rounded-md  "
+                  className="block w-full px-4 py-2 mt-2 bg-white border rounded-md"
                 />
                 <p className="error-text">{touched.email && errors.email}</p>
               </div>
@@ -67,7 +69,7 @@ function SigninModal({ open, onClose, setAccessToken }) {
                   Password
                 </label>
                 <input
-                  placeholder="Enter New Password"
+                  placeholder="Enter your password"
                   name="password"
                   type="password"
                   value={values.password}
@@ -79,13 +81,10 @@ function SigninModal({ open, onClose, setAccessToken }) {
                   {touched.password && errors.password}
                 </p>
               </div>
-              {/* <a href="#" className="text-xs -600 hover:underline">
-              Forget Password?
-            </a> */}
               <div className="mt-6">
                 <button
                   onClick={handleSubmit}
-                  className="w-full px-4 py-2 tracking-wide bg-black font-bold text-white transition-colors duration-200 transform  rounded-md "
+                  className="w-full px-4 py-2 tracking-wide bg-black font-bold text-white transition-colors duration-200 transform rounded-md "
                 >
                   Login
                 </button>

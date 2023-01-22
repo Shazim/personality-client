@@ -1,1 +1,1 @@
-export { signIn, signUp } from "./api-services";
+export { signIn, signUp, getAllQuestions, postAttempts } from "./api-services";
