@@ -16,6 +16,6 @@ export default Object.freeze([
   {
     path: routes.TEST,
     component: Test,
-    privateRoute: false,
+    privateRoute: true,
   },
 ]);

@@ -1,4 +1,5 @@
 import { getAllQuestions, postAttempts } from "api/api-services";
+import Header from "components/Header";
 import React, { useEffect, useState } from "react";
 
 function Test() {
@@ -9,7 +10,6 @@ function Test() {
   const handleGetData = async () => {
     const result = await getAllQuestions();
     if (result) {
-      console.log("result", result);
       setQuestions(result?.data);
     }
   };
@@ -18,11 +18,12 @@ function Test() {
     if (questionIndex + 1 == questions.length) {
       const result = await postAttempts({ answers: questionsData });
       if (result) {
-        console.log(result?.data?.message, "jdjjd");
         setMessage(result?.data?.message);
       }
     } else {
-      setQuestionIndex((prev) => prev + 1);
+      if (questionsData[questionIndex]?.answer_id) {
+        setQuestionIndex((prev) => prev + 1);
+      }
     }
   };
   useEffect(() => {
@@ -39,37 +40,49 @@ function Test() {
     };
     setQuestionData(copyQuestionsData);
   };
-  console.log(questionsData, "snnsns");
 
   return (
     <>
+      <Header />
       {message != "" ? (
-        <div>{message}</div>
+        <div className="font-bold absolute absolute-center shadow-3xl p-20">
+          {message}
+        </div>
       ) : (
-        <div>
-          <div>{questions[questionIndex]?.question_text}</div>
-          {questions[questionIndex]?.answers.map(
-            ({ answer_text, id, point }, index) => (
-              <div>
-                <input
-                  type="radio"
-                  onChange={() => handleChange(id, point)}
-                  name="question_text"
-                  id={index}
-                  value="Bike"
-                />
-                <label for={index}> {answer_text}</label>
-              </div>
-            )
-          )}
-          {questionIndex < questions.length && (
-            <button
-              onClick={handleNext}
-              className="bg-blue m-20 text-white font-bold py-2 px-4 rounded"
-            >
-              {questionIndex + 1 == questions.length ? "Submit" : " Next"}
-            </button>
-          )}
+        <div className="flex flex-col items-center justify-center mt-124">
+          <div>
+            <div className="shadow-3xl p-20 mb-20 ">
+              <span className="font-bold"> Q{questionIndex + 1}:</span>{" "}
+              {questions[questionIndex]?.question_text}
+            </div>
+            {questions[questionIndex]?.answers.map(
+              ({ answer_text, id, point }, index) => (
+                <div className="shadow-3xl p-20 mb-5">
+                  <input
+                    type="radio"
+                    onChange={() => handleChange(id, point)}
+                    name="question_text"
+                    id={index}
+                    checked={questionsData[questionIndex]?.answer_id == id}
+                  />
+                  <label for={index}> {answer_text}</label>
+                </div>
+              )
+            )}
+            {questionIndex < questions.length && (
+              <button
+                disabled={!questionsData[questionIndex]?.answer_id}
+                onClick={handleNext}
+                className={`m-auto ${
+                  !questionsData[questionIndex]?.answer_id
+                    ? "opacity-50"
+                    : "opacity-100"
+                } block bg-blue m-20 text-white font-bold py-2 px-4 rounded`}
+              >
+                {questionIndex + 1 == questions.length ? "Submit" : " Next"}
+              </button>
+            )}
+          </div>
         </div>
       )}
     </>

@@ -5,7 +5,13 @@ module.exports = {
       spacing: {
         128: "32rem",
         144: "36rem",
+        124: "124px",
         450: "450px",
+        20: "20px",
+      },
+      boxShadow: {
+        "3xl":
+          "0px 0px 100px 47px rgb(0 0 0 / 0.1), 4px 2px 4px -2px rgb(0 0 0 / 0.1);",
       },
       colors: {
         blue: "blue",
